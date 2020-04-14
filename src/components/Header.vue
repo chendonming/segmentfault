@@ -8,6 +8,9 @@
         <header-menu />
         <header-search-input />
       </div>
+      <div class="opts">
+        <header-opts/>
+      </div>
     </div>
   </div>
 </template>
@@ -15,12 +18,14 @@
 <script>
 import HeaderMenuVue from './Header/HeaderMenu.vue';
 import HeaderSearchInputVue from './Header/HeaderSearchInput.vue';
+import HeaderOptsVue from './Header/HeaderOpts.vue';
 
 export default {
   name: 'Header',
   components: {
     HeaderMenu: HeaderMenuVue,
     HeaderSearchInput: HeaderSearchInputVue,
+    HeaderOpts: HeaderOptsVue,
   },
 };
 </script>

@@ -1,7 +1,7 @@
 <template>
-  <div class="header_search_wrapper">
+  <div :class="['header_search_wrapper', { 'full-width': focus }]">
     <div class="header_search_input">
-      <input type="text" placeholder="搜索问题或关键字" />
+      <input type="text" @focus="handleFocus" @blur="handleBlur" placeholder="搜索问题或关键字" />
       <i class="iconfont icon-search"></i>
     </div>
   </div>
@@ -10,6 +10,19 @@
 <script>
 export default {
   name: 'HeaderSearchInput',
+  data() {
+    return {
+      focus: false,
+    };
+  },
+  methods: {
+    handleFocus() {
+      this.focus = true;
+    },
+    handleBlur() {
+      this.focus = false;
+    },
+  },
 };
 </script>
 
@@ -17,6 +30,12 @@ export default {
 .header_search_wrapper {
   position: absolute;
   right: 0;
+  transition: all .5s;
+  width: 200px;
+
+  &.full-width {
+    width: 100%;
+  }
 }
 .header_search_input {
   position: relative;
@@ -50,6 +69,7 @@ export default {
     color: #555;
     font-size: 18px;
     right: 5px;
+    cursor: pointer;
   }
 }
 </style>
