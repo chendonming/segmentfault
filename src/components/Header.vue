@@ -8,9 +8,7 @@
         <header-menu />
         <header-search-input />
       </div>
-      <div class="opts">
-        <header-opts/>
-      </div>
+      <header-opts/>
     </div>
   </div>
 </template>
@@ -37,26 +35,9 @@ export default {
   background: var(--background);
 }
 
-@media (min-width: 768px) {
-  .container {
-    width: 750px;
-  }
-}
-
-@media (min-width: 992px) {
-  .container {
-    width: 970px;
-  }
-}
-
-@media (min-width: 1200px) {
-  .container {
-    width: 1140px;
-  }
-}
-
 .container {
   height: 64px;
+  width: 1140px;
   line-height: 64px;
   margin: 0 auto;
   display: flex;
@@ -70,22 +51,15 @@ export default {
     }
   }
 
-  @media (min-width: 768px) {
-    .menu {
-      width: 50%;
-    }
-  }
-
-  @media (min-width: 1200px) {
-    .menu {
-      width: 54%;
-    }
-  }
-
   .menu {
     display: flex;
     position: relative;
     margin-left: 20px;
+    width: 54%;
+  }
+
+  .header_opts {
+    margin-left: 30px;
   }
 }
 </style>

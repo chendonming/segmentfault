@@ -8,5 +8,7 @@
 body {
   --primary: #009A61;
   --background: #fafafa;
+  font-size: 14px;
+  line-height: 1.42858;
 }
 </style>

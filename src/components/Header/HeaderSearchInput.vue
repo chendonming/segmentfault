@@ -8,22 +8,22 @@
 </template>
 
 <script>
-export default {
-  name: 'HeaderSearchInput',
-  data() {
-    return {
-      focus: false,
-    };
-  },
-  methods: {
-    handleFocus() {
-      this.focus = true;
+  export default {
+    name: 'HeaderSearchInput',
+    data() {
+      return {
+        focus: false,
+      };
     },
-    handleBlur() {
-      this.focus = false;
+    methods: {
+      handleFocus() {
+        this.focus = true;
+      },
+      handleBlur() {
+        this.focus = false;
+      },
     },
-  },
-};
+  };
 </script>
 
 <style lang="less" scoped>
@@ -43,8 +43,7 @@ export default {
     box-sizing: border-box;
     width: 100%;
     border-radius: 4px;
-    padding: 6px 12px;
-    padding-right: 24px;
+    padding: 6px 24px 6px 12px;
     border: 1px solid #ccc;
     outline: 0;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
@@ -66,7 +65,7 @@ export default {
 
   .iconfont {
     position: absolute;
-    color: #555;
+    color: #999;
     font-size: 18px;
     right: 5px;
     cursor: pointer;

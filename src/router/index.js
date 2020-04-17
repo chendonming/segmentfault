@@ -1,23 +1,25 @@
-import Vue from 'vue';
+import Vue from 'vue/dist/vue';
 import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
 
-const arr = require.context('../views', true, /\.vue$/).keys();
-const routes = arr.map((v) => {
-  const name = v.substring(2, v.indexOf('.vue'));
-  return {
-    path: `/${name}`,
-    name,
-    component: require(`@/views/${name}`).default,
-  };
-});
-
-routes.unshift({
-  path: '/',
-  name: 'home',
-  component: require('@/views/Home').default,
-});
+const routes = [
+  {
+    path: '/',
+    redirect: 'main',
+  },
+  {
+    path: '/main',
+    component: () => import('@/views/Main'),
+    children: [
+      {
+        path: '/',
+        name: 'home',
+        component: () => import('@/views/Home/Home'),
+      },
+    ],
+  },
+];
 
 const router = new VueRouter({
   mode: 'history',
