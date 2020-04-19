@@ -6,27 +6,24 @@
 
 <script>
   import ChannelCard from '@/views/Home/ChannelCard';
+  import { channelsQueryList } from '@/api';
 
   export default {
     name: 'SideBar',
     components: { ChannelCard },
     data() {
       return {
-        list: [
-          {
-            img: '/img/861000683-5d7ef19e16178_small.png',
-            name: '人工智能',
-          },
-          {
-            img: '/img/1940304143-5a72802e507db_small.png',
-            name: 'Arm计算',
-          },
-          {
-            icon: 'icon-youxiang',
-            name: '邮箱',
-          },
-        ],
+        list: [],
       };
+    },
+    created() {
+      this.query();
+    },
+    methods: {
+      async query() {
+        const data = await channelsQueryList();
+        this.list = data.data;
+      },
     },
   };
 </script>

@@ -11,23 +11,23 @@
 </template>
 
 <script>
-export default {
-  name: 'HeaderMenu',
-  data() {
-    return {
-      list: [
-        { label: '首页', href: '/', type: 'link' },
-        { label: '回答', href: '/', type: 'link' },
-        { label: '专栏', href: '/', type: 'link' },
-        { label: '资讯', href: '/', type: 'link' },
-        { label: '课程', href: '/', type: 'link' },
-        { label: '活动', href: '/', type: 'link' },
-        { label: '发现', href: '/', type: 'show' },
-      ],
-      active: 0,
-    };
-  },
-};
+  export default {
+    name: 'HeaderMenu',
+    data() {
+      return {
+        list: [
+          { label: '首页', href: '/', type: 'link' },
+          { label: '回答', href: '/', type: 'link' },
+          { label: '专栏', href: '/', type: 'link' },
+          { label: '资讯', href: '/', type: 'link' },
+          { label: '课程', href: '/', type: 'link' },
+          { label: '活动', href: '/', type: 'link' },
+          { label: '发现', href: '/', type: 'show' },
+        ],
+        active: 0,
+      };
+    },
+  };
 </script>
 
 <style lang="less" scoped>

@@ -27,6 +27,9 @@
         default: false,
       },
 
+      /**
+       * 按钮的外观大小
+       */
       size: {
         type: String,
         validator(value) {

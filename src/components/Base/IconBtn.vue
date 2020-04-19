@@ -6,15 +6,15 @@
 </template>
 
 <script>
-export default {
-  name: 'IconBtn',
-  props: {
-    icon: {
-      type: String,
-      default: 'icon-naoling',
+  export default {
+    name: 'IconBtn',
+    props: {
+      icon: {
+        type: String,
+        default: 'icon-naoling',
+      },
     },
-  },
-};
+  };
 </script>
 
 <style lang="less" scoped>
