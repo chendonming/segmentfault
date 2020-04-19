@@ -1,4 +1,6 @@
 /* eslint-disable */
+import { $$dispathEvent } from '@/utils';
+
 export default {
   data() {
     return {
@@ -10,6 +12,9 @@ export default {
       document.addEventListener(name, fn);
       this.PrivateEventMixArray.push({ name, fn });
     },
+    $$dispath(name, data) {
+      $$dispathEvent(name, data);
+    }
   },
   beforeDestroy() {
     if (this.PrivateEventMixArray && this.PrivateEventMixArray.length > 0) {

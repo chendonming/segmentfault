@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { ERROR } from '@/common/constant';
+import { $$dispathEvent } from '@/utils';
 
 const ajax = axios.create({
   baseURL: '/api/',
@@ -9,9 +10,7 @@ function SfError(message = '系统错误') {
   this.name = 'SfError';
   this.message = message;
   this.stack = (new Error()).stack;
-  const event = new Event(ERROR);
-  event.message = message;
-  document.dispatchEvent(event);
+  $$dispathEvent(ERROR, { message });
 }
 
 SfError.prototype = Object.create(Error.prototype);

@@ -11,14 +11,14 @@
   export default {
     name: 'App',
     created() {
-      document.addEventListener(ERROR, this.handleError);
+      this.$$on(ERROR, this.handleError);
     },
     methods: {
       handleError(e) {
         Notification.error(e.message);
       },
       load() {
-        document.dispatchEvent(new Event(INFINITESCROLL));
+        this.$$dispath(INFINITESCROLL);
       },
     },
   };
