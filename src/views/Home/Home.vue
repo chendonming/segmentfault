@@ -1,32 +1,40 @@
 <template>
   <div class="Home">
     <SideBar/>
-    <ChannelList name="前端"/>
+    <router-view/>
   </div>
 </template>
 
 <script>
   import SideBar from '@/views/Home/SideBar';
-  import ChannelList from '@/views/Home/ChannelList';
+  import { mapMutations } from 'vuex';
 
   export default {
     name: 'Home',
-    components: { ChannelList, SideBar },
+    components: {
+      SideBar,
+    },
+    methods: {
+      ...mapMutations(['setBg'])
+    },
+    created() {
+      this.setBg('');
+    }
   };
 </script>
 
 <style lang="less" scoped>
-.Home {
-  width: 1140px;
-  margin: 30px auto 0;
-  display: flex;
+  .Home {
+    width: 1140px;
+    margin: 30px auto 0;
+    display: flex;
 
-  .side_bar {
-    padding: 0 20px;
-  }
+    .side_bar {
+      padding: 0 20px;
+    }
 
-  .channel_list {
-    width: 58.333%;
+    /deep/ .channel_list {
+      width: 58.333%;
+    }
   }
-}
 </style>

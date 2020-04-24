@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { $$dispathEvent } from '@/utils';
+import { $_dispathEvent } from '@/utils';
 
 export default {
   data() {
@@ -13,7 +13,7 @@ export default {
       this.PrivateEventMixArray.push({ name, fn });
     },
     $$dispath(name, data) {
-      $$dispathEvent(name, data);
+      $_dispathEvent(name, data);
     }
   },
   beforeDestroy() {

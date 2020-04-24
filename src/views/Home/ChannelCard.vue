@@ -2,8 +2,8 @@
   <div class="channel_card" :style="{width: typeof width === 'number' ? `${width}px` : width}">
     <span class="channel_card__header" v-if="title">{{title}}</span>
     <div class="channel_card__body">
-      <div :class="['channel_card__item', { 'active': select === index }]"
-           @click="handleClick(index)"
+      <div :class="['channel_card__item', { 'active': select === item.url }]"
+           @click="handleClick(item,index)"
            v-for="(item,index) in list" :key="index">
         <img class="channel_card__icon" :src="item.img" alt="" v-if="item.img">
         <i class="iconfont channel_card__icon" :class="item.icon" v-else></i>
@@ -14,6 +14,8 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
+
   /**
    * 频道卡片
    */
@@ -29,13 +31,23 @@
     },
     data() {
       return {
-        select: 0,
+        select: '',
       };
     },
+    computed: {
+      ...mapGetters(['getChannelList']),
+    },
+    created() {
+      this.selectItem();
+    },
     methods: {
-      handleClick(i) {
-        this.select = i;
-        this.$emit('node-click', this.list[i]);
+      handleClick(item) {
+        this.select = item.url;
+        this.$router.push({ path: `/channel/${item.url}` });
+      },
+
+      selectItem() {
+        this.select = this.$route.params.id;
       },
     },
   };
@@ -74,7 +86,7 @@
       color: #757575;
 
       &:hover {
-        background: rgba(0,154,97,0.08);
+        background: rgba(0, 154, 97, 0.08);
       }
 
       &.active {

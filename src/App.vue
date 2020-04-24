@@ -1,5 +1,5 @@
 <template>
-  <div id="app" v-infinite-scroll="load">
+  <div id="app" v-infinite-scroll="load" :style="{'background': getBg}">
     <router-view/>
   </div>
 </template>
@@ -7,15 +7,19 @@
 <script>
   import { ERROR, INFINITESCROLL } from '@/common/constant';
   import { Notification } from 'element-ui';
+  import { mapGetters } from 'vuex';
 
   export default {
     name: 'App',
     created() {
       this.$$on(ERROR, this.handleError);
     },
+    computed: {
+      ...mapGetters(['getBg'])
+    },
     methods: {
       handleError(e) {
-        Notification.error(e.message);
+        Notification.error(e.data.message);
       },
       load() {
         this.$$dispath(INFINITESCROLL);

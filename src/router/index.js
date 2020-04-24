@@ -14,9 +14,26 @@ const routes = [
     children: [
       {
         path: '/',
-        name: 'home',
         component: () => import('@/views/Home/Home'),
+        children: [
+          {
+            path: '',
+            redirect: '/channel/frontend'
+          },
+          {
+            path: '/channel/:id',
+            component: () => import('@/views/Home/ChannelList'),
+          },
+        ],
       },
+      {
+        path: '/article/:id',
+        component: () => import('@/views/ArticleInfo/ArticleInfo')
+      },
+      {
+        path: '/Write',
+        component: () => import('@/views/Write/TheWrite')
+      }
     ],
   },
 ];

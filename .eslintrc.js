@@ -17,6 +17,7 @@ module.exports = {
     'import/no-dynamic-require': 'off',
     'global-require': 'off',
     'import/extensions': 'off',
+    'camelcase': 'off'
   },
   overrides: [
     {

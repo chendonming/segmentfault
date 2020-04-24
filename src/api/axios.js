@@ -1,41 +1,47 @@
 import axios from 'axios';
 import { ERROR } from '@/common/constant';
-import { $$dispathEvent } from '@/utils';
+import { $_dispathEvent } from '@/utils';
+
+const uid = sessionStorage.getItem('uid');
 
 const ajax = axios.create({
   baseURL: '/api/',
+  headers: {
+    uid,
+  },
 });
 
-function SfError(message = '系统错误') {
+function SfError(message = '系统错误', code) {
   this.name = 'SfError';
   this.message = message;
-  this.stack = (new Error()).stack;
-  $$dispathEvent(ERROR, { message });
+  this.stack = new Error().stack;
+  $_dispathEvent(ERROR, {
+    message,
+    code,
+  });
 }
 
 SfError.prototype = Object.create(Error.prototype);
 SfError.prototype.constructor = SfError;
 
-export const get = async (url, parmas) => {
-  const getdata = await ajax({
-    method: 'get',
-    url,
-    parmas,
-  });
+function axiosCommon() {
+  return async function (url, type, params) {
+    const getdata = await ajax({
+      method: type,
+      url,
+      [type.toLowerCase() === 'get' ? 'params' : 'data']: params,
+    })
+      .catch((e) => {
+        throw new SfError(e.message, e.response.status);
+      });
+    if (getdata.data.code === 200) {
+      return getdata.data;
+    }
 
-  return getdata.data;
-};
+    throw new SfError(getdata.data.msg, getdata.data.code);
+  };
+}
 
-export const post = async (url, data) => {
-  const getdata = await ajax({
-    method: 'post',
-    url,
-    data,
-  });
+export const get = (url, params) => axiosCommon()(url, 'get', params);
 
-  if (getdata.data.code === 200) {
-    return getdata.data;
-  }
-
-  throw new SfError();
-};
+export const post = (url, params) => axiosCommon()(url, 'post', params);

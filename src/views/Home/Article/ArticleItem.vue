@@ -6,16 +6,20 @@
     <div class="article_item__body">
       <a class="article_item__info" :href="url">
         <div class="article_item__title">{{data.title}}</div>
+        <a :href="url" :style="imgStyle" class="article_item__img" v-if="data.imageUrl"></a>
         <div class="article_item__desc">{{data.excerpt}}</div>
       </a>
-      <a :href="url" :style="imgStyle" class="article_item__img" v-if="data.imageUrl"></a>
+      <ArticleComment :name="data.userNickname" :date="data.createTime"/>
     </div>
   </div>
 </template>
 
 <script>
+  import ArticleComment from '@/views/Home/Article/ArticleComment';
+
   export default {
     name: 'ArticleItem',
+    components: { ArticleComment },
     props: {
       data: Object,
     },
@@ -32,8 +36,11 @@
 
 <style lang="less" scoped>
   .article_item {
-    height: 151px;
     box-sizing: border-box;
+  }
+
+  .article_item__body {
+    clear: both;
   }
 
   .article_item__from {

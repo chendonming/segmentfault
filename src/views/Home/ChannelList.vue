@@ -1,7 +1,7 @@
 <template>
   <div class="channel_list">
     <div class="channel_list__header">
-      {{name}}
+      {{getChannel ? getChannel.name : ''}}
       <span class="header__samll_text">只看推荐</span>
       <SfButton size="small">推送配置</SfButton>
     </div>
@@ -21,6 +21,7 @@
   import ArticleItem from '@/views/Home/Article/ArticleItem';
   import { recommendQueryList } from '@/api';
   import { INFINITESCROLL } from '@/common/constant';
+  import { mapGetters } from 'vuex';
 
   export default {
     name: 'ChannelList',
@@ -41,13 +42,32 @@
         totalPage: 0,
       };
     },
+    computed: {
+      ...mapGetters(['getChannel']),
+    },
+    watch: {
+      getChannel: {
+        handler(val) {
+          if (val) {
+            this.$set(this.page, 'pageNum', 1);
+            this.$set(this, 'list', []);
+            this.query();
+          }
+        },
+        deep: true,
+      },
+    },
     created() {
-      this.query();
+      if (this.getChannel) {
+        this.query();
+      }
       this.$$on(INFINITESCROLL, this.load);
     },
     methods: {
       async query() {
-        const data = await recommendQueryList(this.page);
+        const data = await recommendQueryList(
+          { channelsType: this.getChannel.url, ...this.page },
+        );
         this.totalPage = data.data.pages;
         this.list = this.list.concat(this.bridgeFunc(data.data.list));
       },
@@ -96,11 +116,10 @@
 
     .channel_list__scrollbar {
       overflow: auto;
-      width: 105%;
     }
 
     .article_item {
-      margin: 10px 0;
+      margin-top: 15px;
     }
   }
 </style>

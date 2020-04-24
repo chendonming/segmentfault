@@ -7,6 +7,7 @@
 <script>
   import ChannelCard from '@/views/Home/ChannelCard';
   import { channelsQueryList } from '@/api';
+  import { mapMutations } from 'vuex';
 
   export default {
     name: 'SideBar',
@@ -16,13 +17,29 @@
         list: [],
       };
     },
+    watch: {
+      '$route.params': {
+        handler() {
+          this.selectChannel();
+        },
+        deep: true,
+      },
+    },
     created() {
       this.query();
     },
     methods: {
+      ...mapMutations(['setChannelList', 'setChannel']),
       async query() {
         const data = await channelsQueryList();
         this.list = data.data;
+        this.setChannelList(this.list);
+        this.selectChannel();
+      },
+
+      selectChannel() {
+        const data = this.list.filter((v) => v.url === this.$route.params.id);
+        this.setChannel(data?.[0]);
       },
     },
   };
