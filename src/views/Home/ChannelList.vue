@@ -58,9 +58,6 @@
       },
     },
     created() {
-      if (this.getChannel) {
-        this.query();
-      }
       this.$$on(INFINITESCROLL, this.load);
     },
     methods: {

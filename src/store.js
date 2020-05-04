@@ -1,5 +1,5 @@
 /* eslint-disable */
-import Vue from 'vue/dist/vue';
+import Vue from 'vue';
 import Vuex from 'vuex';
 
 Vue.use(Vuex);
@@ -29,6 +29,7 @@ const getters = {
 };
 
 export default new Vuex.Store({
+  strict: process.env.NODE_ENV !== 'production',
   state,
   getters,
   mutations,

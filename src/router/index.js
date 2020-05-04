@@ -1,4 +1,4 @@
-import Vue from 'vue/dist/vue';
+import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
@@ -30,12 +30,12 @@ const routes = [
         path: '/article/:id',
         component: () => import('@/views/ArticleInfo/ArticleInfo')
       },
-      {
-        path: '/Write',
-        component: () => import('@/views/Write/TheWrite')
-      }
     ],
   },
+  {
+    path: '/write',
+    component: () => import('@/views/Write/TheWrite')
+  }
 ];
 
 const router = new VueRouter({

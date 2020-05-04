@@ -1,9 +1,12 @@
 <template>
   <div class="drop_down_btn">
-    <button class="btn" :class="size">
+    <button class="btn" :class="size" @click="handleClick">
       <slot></slot>
       <span class="caret" v-if="dropdown"></span>
     </button>
+    <ul class="dropdown__menu" v-show="visible">
+      <slot name="menu"></slot>
+    </ul>
   </div>
 </template>
 
@@ -38,6 +41,24 @@
         },
       },
     },
+    data() {
+      return {
+        visible: false
+      };
+    },
+    created() {
+      this.$$on('click', this.handleGobalClick);
+    },
+    methods: {
+      handleClick() {
+        this.visible = true;
+      },
+      handleGobalClick(e) {
+        if (!e.target.closest('.drop_down_btn')) {
+          this.visible = false;
+        }
+      }
+    }
   };
 </script>
 
@@ -48,6 +69,39 @@
     vertical-align: middle;
     line-height: 34px;
     color: #666;
+
+    .dropdown__menu {
+      position: absolute;
+      top: 35px;
+      min-width: 120px;
+      left: 0;
+      z-index: 1000;
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      border-radius: 4px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+      background-clip: padding-box;
+
+      .el-divider--horizontal {
+        margin: 5px 0;
+        background: #e5e5e5;
+      }
+
+      li {
+        &:hover {
+          background: #f5f5f5;
+        }
+
+        a {
+          display: block;
+          padding: 3px 20px;
+          font-weight: normal;
+          line-height: 1.42858;
+          color: #333;
+          white-space: nowrap;
+        }
+      }
+    }
 
     .btn {
       margin-left: 0;

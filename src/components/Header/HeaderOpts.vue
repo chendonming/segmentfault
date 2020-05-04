@@ -1,6 +1,20 @@
 <template>
   <div class="header_opts">
-    <SfButton class="header_opts__item" dropdown>创建</SfButton>
+    <SfButton class="header_opts__item" dropdown>
+      <template #default>创建</template>
+      <template #menu>
+        <li>
+          <a href="/write?type=2">提问题</a>
+        </li>
+        <li>
+          <a href="/write?type=1">写文章</a>
+        </li>
+        <el-divider/>
+        <li>
+          <a href="/write">草稿箱</a>
+        </li>
+      </template>
+    </SfButton>
     <IconBtn class="header_opts__item"/>
     <IconBtn icon="icon-youxiang" class="header_opts__item"/>
     <a class="avatar header_opts__item" href="/user"></a>

@@ -29,11 +29,10 @@
       this.query();
     },
     methods: {
-      ...mapMutations(['setChannelList', 'setChannel']),
+      ...mapMutations(['setChannel']),
       async query() {
         const data = await channelsQueryList();
         this.list = data.data;
-        this.setChannelList(this.list);
         this.selectChannel();
       },
 

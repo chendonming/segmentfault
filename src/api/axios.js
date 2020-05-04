@@ -2,12 +2,12 @@ import axios from 'axios';
 import { ERROR } from '@/common/constant';
 import { $_dispathEvent } from '@/utils';
 
-const uid = sessionStorage.getItem('uid');
+const token = sessionStorage.getItem('token');
 
 const ajax = axios.create({
   baseURL: '/api/',
   headers: {
-    uid,
+    token,
   },
 });
 

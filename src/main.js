@@ -1,4 +1,4 @@
-import Vue from 'vue/dist/vue';
+import Vue from 'vue';
 import ElementUI from 'element-ui';
 import store from '@/store';
 import mavonEditor from 'mavon-editor';

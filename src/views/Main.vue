@@ -6,7 +6,7 @@
 </template>
 
 <script>
-  import HeaderVue from '../components/Header.vue';
+  import HeaderVue from '../components/SfHeader.vue';
 
   export default {
     name: 'Main',

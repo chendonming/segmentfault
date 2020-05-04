@@ -1,14 +1,16 @@
 <template>
-  <div class="header">
+  <div class="header" :style="{'background': bg}">
     <div class="container">
       <div class="logo">
         <a href="/"></a>
       </div>
-      <div class="menu">
-        <header-menu/>
-        <header-search-input/>
-      </div>
-      <header-opts/>
+      <slot>
+        <div class="menu">
+          <header-menu/>
+          <header-search-input/>
+        </div>
+        <header-opts/>
+      </slot>
     </div>
   </div>
 </template>
@@ -19,12 +21,18 @@
   import HeaderOptsVue from './Header/HeaderOpts.vue';
 
   export default {
-    name: 'Header',
+    name: 'SfHeader',
     components: {
       HeaderMenu: HeaderMenuVue,
       HeaderSearchInput: HeaderSearchInputVue,
       HeaderOpts: HeaderOptsVue,
     },
+    props: {
+      bg: {
+        type: String,
+        default: '#fafafa'
+      }
+    }
   };
 </script>
 
@@ -32,7 +40,6 @@
   .header {
     border-top: 3px solid var(--primary);
     box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1), 0 1px rgba(0, 0, 0, 0.1);
-    background: var(--background);
   }
 
   .container {
