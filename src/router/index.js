@@ -1,45 +1,49 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
+import Vue from "vue";
+import VueRouter from "vue-router";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    redirect: 'main',
+    path: "/",
+    redirect: "main",
   },
   {
-    path: '/main',
-    component: () => import('@/views/Main'),
+    path: "/main",
+    component: () => import("@/views/Main"),
     children: [
       {
-        path: '/',
-        component: () => import('@/views/Home/Home'),
+        path: "/",
+        component: () => import("@/views/Home/Home"),
         children: [
           {
-            path: '',
-            redirect: '/channel/frontend'
+            path: "",
+            redirect: "/channel/frontend",
           },
           {
-            path: '/channel/:id',
-            component: () => import('@/views/Home/ChannelList'),
+            path: "/channel/:id",
+            component: () => import("@/views/Home/ChannelList"),
           },
         ],
       },
       {
-        path: '/article/:id',
-        component: () => import('@/views/ArticleInfo/ArticleInfo')
+        path: "/article/:id",
+        component: () => import("@/views/ArticleInfo/ArticleInfo"),
       },
     ],
   },
   {
-    path: '/write',
-    component: () => import('@/views/Write/TheWrite')
-  }
+    path: "/write",
+    component: () => import("@/views/Write/TheWrite"),
+  },
+  {
+    path: "/user/login",
+    component: () => import("@/views/User/Login"),
+  },
 ];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
   routes,
 });

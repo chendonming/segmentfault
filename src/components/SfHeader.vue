@@ -1,9 +1,7 @@
 <template>
   <div class="header" :style="{'background': bg}">
     <div class="container">
-      <div class="logo">
-        <a href="/"></a>
-      </div>
+      <header-logo/>
       <slot>
         <div class="menu">
           <header-menu/>
@@ -19,10 +17,12 @@
   import HeaderMenuVue from './Header/HeaderMenu.vue';
   import HeaderSearchInputVue from './Header/HeaderSearchInput.vue';
   import HeaderOptsVue from './Header/HeaderOpts.vue';
+  import HeaderLogo from '@/components/Header/HeaderLogo';
 
   export default {
     name: 'SfHeader',
     components: {
+      HeaderLogo,
       HeaderMenu: HeaderMenuVue,
       HeaderSearchInput: HeaderSearchInputVue,
       HeaderOpts: HeaderOptsVue,
@@ -48,15 +48,6 @@
     line-height: 64px;
     margin: 0 auto;
     display: flex;
-
-    .logo {
-      a {
-        width: 150px;
-        display: block;
-        background: url("../assets/logo.svg") no-repeat center;
-        height: 64px;
-      }
-    }
 
     .menu {
       display: flex;

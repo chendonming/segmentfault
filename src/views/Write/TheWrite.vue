@@ -106,6 +106,7 @@ export default {
       this.loading = true;
       await saveArticleOrAsk({
         content: this.html,
+        markdownContent: this.handbook,
         title: this.title,
         type: this.$route.query.type || "2",
         channelsId: Array.from(new Set(this.labelSelectList.map((v) => v.chanelId))).join(","),
