@@ -31,6 +31,7 @@
           <span class="svg-text">1.5k</span>
         </div>
       </div>
+      <article-tool-bar />
 
       <div class="article__content">
         <h1 class="h2">{{ data.title }}</h1>
@@ -45,8 +46,12 @@
             <span>约 20 分钟</span>
           </div>
         </div>
-        <article v-html="data.content">
-        </article>
+        <article v-html="data.content" class="markdown-body"></article>
+        <div class="footer-wrapper">
+          <sf-button>赞</sf-button>
+          <sf-button>收藏</sf-button>
+          <sf-button>分享</sf-button>
+        </div>
       </div>
     </div>
     <div class="article__block"></div>
@@ -56,9 +61,13 @@
 <script>
 import { mapMutations } from "vuex";
 import { queryArticle } from "@/api";
+import "@/style/markdown.css";
+import ArticleToolBar from '@/views/Home/Article/ArticleToolBar';
+import SfButton from '@/components/Base/SfButton';
 
 export default {
   name: "ArticleInfo",
+  components: { SfButton, ArticleToolBar },
   data() {
     return {
       data: {},
@@ -78,8 +87,12 @@ export default {
 <style lang="less" scoped>
 .article_info {
   width: 1140px;
-  margin: 30px auto 0;
+  margin: 30px auto;
   display: flex;
+
+  article {
+    padding-top: 20px;
+  }
 
   > div {
     margin: 0 15px;
@@ -92,11 +105,22 @@ export default {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
   }
 
+  .footer-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .drop_down_btn {
+      margin: 20px 5px 0 5px;
+    }
+  }
+
   .article__body {
     width: 0;
     flex-basis: 0;
     flex-grow: 1;
     max-width: 100%;
+    position: relative;
 
     .article_info__author {
       display: flex;
