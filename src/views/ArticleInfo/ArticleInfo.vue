@@ -75,8 +75,10 @@
           <article-comment-item
             v-for="item in commentList"
             :key="item.uuid"
+            :uuid="item.uuid"
             :nickname="item.userName"
             :content="item.content"
+            @submit-comment="submit"
           />
         </div>
       </div>
@@ -119,11 +121,17 @@ export default {
   },
   methods: {
     ...mapMutations(["setBg"]),
-    async submit() {
-      await submitComment({
-        content: this.comment,
-        recommendId: this.id,
-      });
+    async submit(obj) {
+      let param;
+      if (obj) {
+        param = obj;
+      } else {
+        param = {
+          content: this.comment,
+          recommendId: this.id,
+        };
+      }
+      await submitComment(param);
     },
   },
 };
