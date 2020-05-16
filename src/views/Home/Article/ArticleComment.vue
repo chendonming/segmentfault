@@ -1,4 +1,4 @@
-<template>
+<template functional>
   <div class="article_comment">
     <span class="article_comment__like">
       <span class="like__wrapper"><i class="iconfont icon-dianzan"></i></span>

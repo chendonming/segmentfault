@@ -38,6 +38,10 @@ export default {
       this.loading = true;
       const data = await userLogin(this.form).finally(() => (this.loading = false));
       sessionStorage.setItem("token", data.data);
+      const url = sessionStorage.getItem("prev");
+      if (url) {
+        window.location.href = url;
+      }
       await this.$router.push({ path: "/" });
     },
   },

@@ -1,7 +1,8 @@
 <template>
   <div class="toolbar">
     <ul>
-      <li class="toolbar-item iconfont icon-dianzan1">
+      <li class="toolbar-item iconfont icon-dianzan1" :class="{ active: vote }" @click="dianzan">
+        <span class="icon-count">{{ count }}</span>
         <svg
           class="svg-inline--fa fa-thumbs-up fa-w-16"
           aria-hidden="true"
@@ -37,7 +38,7 @@
           ></path>
         </svg>
       </li>
-      <li class="toolbar-item iconfont icon-buoumaotubiao48">
+      <li class="toolbar-item iconfont icon-buoumaotubiao48" @click="comment">
         <svg
           class="svg-inline--fa fa-comment-alt-lines fa-w-16"
           aria-hidden="true"
@@ -78,11 +79,27 @@
 </template>
 
 <script>
+import { voteArticle } from "../../../api";
 /**
  * 文章左侧工具栏（ 快捷点赞， 评论 收藏 分享 ）
  */
 export default {
   name: "ArticleToolBar",
+  props: {
+    id: String,
+    vote: Boolean,
+    count: Number,
+  },
+  methods: {
+    async dianzan() {
+      const result = await voteArticle({ recommendId: this.id });
+      this.$emit("update:vote", true);
+      this.$emit("update:count", this.count + 1);
+    },
+    comment() {
+      window.location.href = "#comment-area";
+    },
+  },
 };
 </script>
 
@@ -103,6 +120,11 @@ export default {
     margin: 10px 0;
     cursor: pointer;
 
+    &:hover {
+      background: #6c757d;
+      color: #fff;
+    }
+
     &.icon-dianzan1 {
       width: 48px;
       height: 48px;
@@ -110,6 +132,11 @@ export default {
       font-size: 26px;
       border: 1px solid #00965e;
       color: #00965e;
+
+      &.active {
+        background: #00965e;
+        color: #fff;
+      }
 
       &:hover {
         background: #00965e;
@@ -134,6 +161,15 @@ export default {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+
+  .icon-count {
+    color: #6c757d;
+    font-size: 1rem;
+    font-weight: 700;
+    position: absolute;
+    top: -28px;
+    left: 19px;
   }
 }
 </style>

@@ -21,3 +21,12 @@ export const userLogin = (obj) => post("user/login", obj);
 
 // 查询单篇文章
 export const queryArticle = (obj) => get("recommend/queryOne", obj);
+
+// 点赞
+export const voteArticle = (obj) => get("recommend/vote", obj);
+
+// 提交评论
+export const submitComment = (obj) => post("comment/save", obj);
+
+// 查询评论
+export const queryComment = (obj) => get("comment/queryComment", obj);
